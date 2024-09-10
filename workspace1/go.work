@@ -1,4 +1,8 @@
 go 1.23.1
 
-use ./firstmodule
-use ./secondmodule
+
+use (
+	./firstmodule
+	./secondmodule
+	./codeorgmodule
+)

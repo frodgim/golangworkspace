@@ -4,6 +4,7 @@ import (
 	// "fmt"
 	"log"
 
+	co "example/codeorgmodule/main2"
 	"example/firstmodule"
 )
 
@@ -30,4 +31,7 @@ func main() {
 	}
 
 	log.Printf("fn 	: %s", message)
+
+	log.Println("Calling Code Org Module...")
+	log.Println(co.GetAnotherString())
 }
