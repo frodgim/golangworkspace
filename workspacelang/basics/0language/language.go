@@ -6,11 +6,15 @@ import (
 )
 
 func TestLanguage() {
-	exampleIfElse()
-	exampleSwitch()
-	exampleLoops()
-	exampleArrays()
-	exampleSlides()
+	// exampleIfElse()
+	// exampleSwitch()
+	// exampleLoops()
+	// exampleArrays()
+	// exampleSlides()
+	// exampleMaps()
+	// exampleFunctions()
+
+	exampleVariadic()
 }
 
 func exampleIfElse() {
@@ -84,7 +88,12 @@ func exampleArrays() {
 	arr2 = []int{1, 2, 3, 4, 5}
 
 	fmt.Println("Array values:", arr)
+	fmt.Println("Length Array:", len(arr))
+	fmt.Println("Cap Array:", cap(arr))
+
 	fmt.Println("Array2 values:", arr2)
+	fmt.Println("Length Array2:", len(arr2))
+	fmt.Println("Cap Array2:", cap(arr2))
 
 	// testDisplayArr(arr, "-arr-")
 	// testDisplayArr(arr2, "-arr2-")
@@ -107,10 +116,10 @@ func testDisplayArr(arr []int, name string) {
 
 func exampleSlides() {
 	var s []string
-	fmt.Println("uninit:", s, s == nil, len(s) == 0)
+	fmt.Println("uninit:", s, " is nil ", s == nil, " len == 0", len(s) == 0)
 
 	s = make([]string, 3)
-	fmt.Println("emp:", s, "len:", len(s), "cap:", cap(s))
+	fmt.Println("Array (s):", s, "len:", len(s), "cap:", cap(s))
 	s[0] = "a"
 	s[1] = "b"
 	s[2] = "c"
@@ -120,7 +129,8 @@ func exampleSlides() {
 	s = append(s, "d")
 	s = append(s, "e", "f")
 
-	fmt.Println("apd:", s)
+	fmt.Printf("After append d,e,f")
+	fmt.Println("Array (s):", s, "len:", len(s), "cap:", cap(s))
 
 	c := make([]string, len(s))
 	copy(c, s)
@@ -134,6 +144,11 @@ func exampleSlides() {
 
 	l = s[3:]
 	fmt.Println("sl3:", l)
+
+	var l2 []string = make([]string, 10)
+	fmt.Println("sl4:", l2, "len(l2)=", len(l2), "cap(l2)=", cap(l2))
+	l2 = s[1:3:4]
+	fmt.Println("sl4:", l2, "len(l2)=", len(l2), "cap(l2)=", cap(l2))
 
 	t := []string{"g", "h", "i"}
 	fmt.Println("dcl:", t)
@@ -156,4 +171,88 @@ func exampleSlides() {
 	}
 	fmt.Println("2d: ", twoD)
 
+}
+
+func exampleMaps() {
+
+	mymap := make(map[string]string)
+
+	mymap["uno"] = "one"
+	mymap["dos"] = "two"
+
+	fmt.Println("My map len: ", len(mymap))
+
+	for key, val := range mymap {
+		fmt.Println("My map key:", key, " and val:", val)
+	}
+	fmt.Println("-----")
+
+	mymap["tres"] = "threw"
+	fmt.Println("My map len: ", len(mymap))
+	for key := range mymap {
+		fmt.Println("My map key:", key, " and val:", mymap[key])
+	}
+
+}
+
+func exampleFunctions() {
+	fmt.Println("Calling fn newfuncwith2vars(2,4)", newfuncwith2vars(2, 4))
+	fmt.Println("Calling fn newfuncwith3vars(2,4,6)", newfuncwith3vars(2, 4, 6))
+	fmt.Println("Calling fn newfuncwithvariadicinput(2,4,6)", newfuncwithvariadicinput(2, 4, 6))
+	sum, mul := newfuncreturningmultiple(2, 4)
+	fmt.Println("Calling fn newfuncreturningmultiple(2,4)", " sum:", sum, ", mul:", mul)
+
+	a, b := 5, 10
+
+	fmt.Printf("Orig: a=%d,b=%d \n", a, b)
+	swap(&a, &b)
+	fmt.Printf("Swapped: a=%d,b=%d \n", a, b)
+
+}
+
+func newfuncwith2vars(a int, b int) int {
+	return a * b
+}
+
+func newfuncwith3vars(a, b, c int) int {
+	return (a + b) * c
+}
+
+func newfuncwithvariadicinput(a int, b ...int) int {
+
+	fmt.Println("a's value: ", a, "b's value", b)
+
+	var ret int = a
+
+	for _, val := range b {
+		ret += val
+	}
+
+	return ret
+}
+
+func newfuncreturningmultiple(a, b int) (int, int) {
+	return a + b, a * b
+}
+
+func swap(a, b *int) {
+	*a, *b = *b, *a
+}
+
+func exampleVariadic() {
+	fmt.Println("sum(1,2)", sum(1, 2))
+	fmt.Println("sum(1,2,9)", sum(1, 2, 9))
+
+	arrInts := []int{4, 0, 1, 87}
+	fmt.Println("sum(arrInts)", sum(arrInts...))
+}
+
+func sum(a ...int) int {
+	fmt.Print(a)
+	sum := 0
+	for _, num := range a {
+		sum += num
+	}
+
+	return sum
 }

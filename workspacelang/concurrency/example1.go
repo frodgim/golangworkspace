@@ -19,6 +19,13 @@ func ExecuteExample1() {
 
 	wg.Wait()
 
+	chatChannel = make(chan string)
+	wg.Add(2)
+	go sendMessages(numMsgs, chatChannel, &wg)
+	go receiveMessage(chatChannel, &wg)
+
+	wg.Wait()
+
 }
 
 func sendMessages(numMsgs int, chatChannel chan<- string, wg *sync.WaitGroup) {

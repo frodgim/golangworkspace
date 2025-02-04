@@ -7,4 +7,5 @@
         },
     },
     "go.formatTool": "gofmt",
+    "window.zoomLevel": 1
 }

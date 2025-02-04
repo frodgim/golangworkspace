@@ -17,6 +17,7 @@ type Bicycle struct {
 }
 
 func TestInterfaces() {
+
 	var car Car = Car{currentSpeed: 0}
 	car.Print()
 	car.SpeedUp(5)

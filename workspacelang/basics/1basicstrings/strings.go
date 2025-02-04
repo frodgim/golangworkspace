@@ -13,6 +13,7 @@ func Misc() {
 	fmt.Printf("%v %v, %v \n", strings.Repeat("Paco", 3), "que mi Paco", strings.Repeat("Paco", 3))
 
 	var arrayPacos []string = []string{"paco", "paco", "paco"}
+	fmt.Printf("Type is %T \n", arrayPacos)
 	fmt.Println(arrayPacos)
 	fmt.Printf("%v %v, %v", strings.Repeat("Paco", 3), "que mi Paco", strings.Join(arrayPacos, "-"))
 }
