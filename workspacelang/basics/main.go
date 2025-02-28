@@ -3,10 +3,10 @@ package main
 import (
 	"fmt"
 
-	// language "trainingpaco.com/basics/0language"
+	language "trainingpaco.com/basics/0language"
 	// basicstrings "trainingpaco.com/basics/1basicstrings"
 	// interfaces "trainingpaco.com/basics/2interfaces"
-	slices "trainingpaco.com/basics/3slices"
+	// slices "trainingpaco.com/basics/3slices"
 )
 
 func main() {
@@ -25,8 +25,8 @@ func main() {
 	// interfaces.TestInterfaces()
 
 	//comment-uncomment the zone
-	// language.TestLanguage()
+	language.TestLanguage()
 
 	//comment-uncomment the zone
-	slices.TestSlices()
+	// slices.TestSlices()
 }
