@@ -6,10 +6,10 @@ import (
 )
 
 func TestLanguage() {
-	exampleIfElse()
-	exampleSwitch()
-	exampleLoops()
-	exampleArrays()
+	// exampleIfElse()
+	// exampleSwitch()
+	// exampleLoops()
+	// exampleArrays()
 	exampleSlides()
 }
 
