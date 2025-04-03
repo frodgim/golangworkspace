@@ -19,6 +19,10 @@ func main() {
 	// isContained := basicstrings.ContainsStr(str, substr)
 	// fmt.Printf("%s contains %s ? => %v \n", str, substr, isContained)
 
+	//comment-uncomment the zone
+	language.TestLanguage()
+
+	//comment-uncomment the zone
 	// basicstrings.Misc()
 
 	//comment-uncomment the zone
