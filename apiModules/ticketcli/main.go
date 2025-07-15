@@ -54,6 +54,11 @@ func init() {
 	createCmd.Flags().String("type", "", "Ticket type (kindA, kindB, kindC)")
 	createCmd.MarkFlagRequired("name")
 	createCmd.MarkFlagRequired("type")
+
+	updateCmd.Flags().String("name", "", "Ticket name")
+	updateCmd.Flags().String("type", "", "Ticket type (kindA, kindB, kindC)")
+	updateCmd.MarkFlagRequired("name")
+	updateCmd.MarkFlagRequired("type")
 }
 
 var getCmd = &cobra.Command{
@@ -93,13 +98,6 @@ var updateCmd = &cobra.Command{
 		body, _ := io.ReadAll(resp.Body)
 		fmt.Println(string(body))
 	},
-}
-
-func init() {
-	updateCmd.Flags().String("name", "", "Ticket name")
-	updateCmd.Flags().String("type", "", "Ticket type (kindA, kindB, kindC)")
-	updateCmd.MarkFlagRequired("name")
-	updateCmd.MarkFlagRequired("type")
 }
 
 var deleteCmd = &cobra.Command{
