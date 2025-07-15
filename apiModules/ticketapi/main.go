@@ -7,6 +7,9 @@ import (
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 	"net/http"
+	"os"
+
+	"github.com/joho/godotenv"
 )
 
 type Ticket struct {
@@ -21,10 +24,20 @@ var (
 	ctx = context.Background()
 )
 
+const isMySQLLocal bool = true
+
 var validTypes = map[string]bool{"kindA": true, "kindB": true, "kindC": true}
 
 func main() {
-	dsn := "root:password@tcp(mysql:3306)/ticketdb?charset=utf8mb4&parseTime=True&loc=Local"
+	if isMySQLLocal {
+		_ = godotenv.Load(".env")
+	}
+
+	dbPort := os.Getenv("DB_PORT")
+	if dbPort == "" {
+		dbPort = "3306"
+	}
+	dsn := os.Getenv("DB_USER") + ":" + os.Getenv("DB_PASSWORD") + "@tcp(" + os.Getenv("DB_HOST") + ":" + dbPort + ")/" + os.Getenv("DB_NAME") + "?charset=utf8mb4&parseTime=True&loc=Local"
 	dbConn, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
 	if err != nil {
 		panic("failed to connect database")
@@ -33,7 +46,7 @@ func main() {
 	db.AutoMigrate(&Ticket{})
 
 	rdb = redis.NewClient(&redis.Options{
-		Addr: "redis:6379",
+		Addr: os.Getenv("REDIS_ADDR"),
 	})
 
 	r := gin.Default()
