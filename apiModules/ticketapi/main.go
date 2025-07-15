@@ -2,14 +2,14 @@ package main
 
 import (
 	"context"
+	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/go-redis/redis/v8"
+	"github.com/joho/godotenv"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 	"net/http"
 	"os"
-
-	"github.com/joho/godotenv"
 )
 
 type Ticket struct {
@@ -57,7 +57,11 @@ func main() {
 	r.DELETE("/tickets/:id", deleteTicket)
 	r.GET("/tickets", listTickets)
 
-	r.Run(":8080")
+	appPort := os.Getenv("APP_PORT")
+	if appPort == "" {
+		appPort = "8080"
+	}
+	r.Run(fmt.Sprintf(":%s", appPort)) // listen and serve on ":8080" or the port specified in APP_PORT)
 }
 
 func createTicket(c *gin.Context) {
