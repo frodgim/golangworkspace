@@ -79,3 +79,12 @@ curl -X DELETE http://localhost:8080/tickets/1
 ```sh
 curl http://localhost:8080/tickets
 ```
+
+## Caching Strategy
+
+The API uses Redis to cache the 50 most frequently accessed, created, or updated tickets:
+- Each ticket is cached in Redis with a key like `ticket:{id}`.
+- A Redis sorted set (`ticket:freq`) tracks how often each ticket is accessed or modified.
+- On every GET, POST (create), or PUT (update) operation, the ticket is cached and its frequency is incremented.
+- Only the top 50 most frequent ticket IDs are kept in the cache; others are evicted automatically.
+- This improves performance for the most commonly used tickets while keeping memory usage predictable.
